@@ -16,7 +16,7 @@
 	</properties>
 
 	<build>
-		<finalName>${project.artifactId}-${env}</finalName> 
+		<finalName>${project.artifactId}_${env}</finalName> 
      	<resources>
      	
      		<resource>
