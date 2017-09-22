@@ -208,32 +208,31 @@
     
     
     <profiles>
-    
-	 	  
-	  <profile>
-		    <id>dev</id>
+     	   <profile>
+		    <id>DEV</id>
 		    <activation>
 		      <activeByDefault>true</activeByDefault>
 		    </activation>
 		    <properties>
-		      <env>dev</env>
+		      <env>DEV</env>
 		    </properties>
 	  </profile>
 	  
 	  <profile>
-		    <id>qa</id>
+		    <id>SANDBOX</id>
 		    <properties>
-		      <env>qa</env>
+		      <env>SANDBOX</env>
 		    </properties>
 	  </profile>
 	  
 	  <profile>
-		    <id>prod</id>
+		    <id>Production</id>
 		    <properties>
-		      <env>prod</env>
+		      <env>Production</env>
 		    </properties>
 	  </profile>
+	 	  
 	  
-	</profiles>
+    </profiles>
 
 </project>
