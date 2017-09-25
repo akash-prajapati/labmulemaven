@@ -13,12 +13,27 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<mule.version>3.8.5</mule.version>
     	<mule.tools.version>1.2</mule.tools.version>
+    	<mule.project.filename>${project.artifactId}-A-${env}</mule.project.filename>
 	</properties>
 
 	<build>
-		<finalName>${project.artifactId}_${env}</finalName> 
-     	<resources>
-     	
+			
+			<!--  FINAL COMMAND -->	
+			
+			<!--
+			mvn clean package -P dev
+			mvn deploy -Dcloudhub.username=Username -Dcloudhub.password=Password -Dcloudhub.domain=akashp2017-sep-dev -P dev
+			mvn deploy -Dcloudhub.username=Username -Dcloudhub.password=Password -Dcloudhub.domain=labmulemaven-A-dev -P sandbox
+			
+			-->			
+			<!--
+			mvn clean package -P dev
+			mvn clean package -P sandbox
+			mvn clean package -P Production
+			-->
+            
+		<finalName>${project.artifactId}-A-${env}</finalName> 
+     	<resources>     	
      		<resource>
      			<directory>src/main/resources</directory>
      			<includes>
@@ -26,12 +41,89 @@
      				<include>projectcommon.properties</include>     				 
      				<include>mule*.properties</include>      				
      			</includes>
-     		</resource>
-     		
+     		</resource>     		
      	</resources>
+     	     	
+     	<plugins>
      	
-     	<plugins>       	
-		
+     	<!-- 
+     		
+            <plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>cloudhub-maven-plugin</artifactId>
+				<version>1.0</version>
+			    <configuration>			    	
+			        <muleVersion>${mule.version}</muleVersion>
+			        <domain>${project.artifactId}-akash-${env}</domain>
+			        <username>akashsep2017@dev</username>
+					<password>MuleSoft@2017</password>
+			        <application>${project.basedir}/target/${project.artifactId}-akash-${env}.zip</application>			       	
+			        <properties>
+   						<env.mule>${env}</env.mule>
+					</properties>			        
+			    </configuration>
+			    <executions>
+			        <execution>
+			            <id>deploy</id>
+			            <phase>deploy</phase>
+			            <goals>
+			                <goal>deploy</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
+			-->
+			
+			<!--  FINAL COMMAND -->	
+			<!-- 
+			mvn clean package -P dev
+			mvn deploy -Dcloudhub.username=akashsep2017 -Dcloudhub.password=MuleSoft@2017 -Dcloudhub.domain=akashp2017-sep-dev -P dev
+			mvn deploy -Dcloudhub.username=akashsep2017 -Dcloudhub.password=MuleSoft@2017 -Dcloudhub.domain=labmulemaven-A-dev -P dev
+			
+			-->
+     		
+	     	<plugin>
+				    <groupId>org.mule.tools.maven</groupId>
+				    <artifactId>mule-maven-plugin</artifactId>
+				    <version>2.0</version>
+				    <configuration>				    
+				        <deploymentType>cloudhub</deploymentType>
+				        <target>CloudHub</target>				        
+				        <muleVersion>${mule.version}</muleVersion>
+				        <username>${cloudhub.username}</username>
+				        <password>${cloudhub.password}</password>				        
+				        <domain>${cloudhub.domain}</domain>
+						<redeploy>true</redeploy>
+						<workerType>Micro</workerType>
+						<workers>1</workers>
+				        <environment>${env}</environment>
+				        <!-- <uri>https://anypoint.mulesoft.com</uri> -->
+				        <application>${project.basedir}/target/${project.artifactId}-A-${env}.zip</application>
+				        <applicationName>${cloudhub.domain}</applicationName>					        	
+				        <properties>
+   								<env.mule>${env}</env.mule>
+						</properties>	        
+				    </configuration>
+				    <executions>
+				        <execution>	
+				        	<id>deploy</id>
+          					<phase>deploy</phase>			           
+				            <goals>
+				                <goal>deploy</goal>
+				            </goals>
+				        </execution>
+				    </executions>
+			</plugin>
+			    		
+			<plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-deploy-plugin</artifactId>
+				  <version>2.8.2</version>
+				  <configuration>
+				    <skip>false</skip>
+				  </configuration>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-app-maven-plugin</artifactId>
@@ -41,10 +133,7 @@
                     <copyToAppsDirectory>true</copyToAppsDirectory>                    
 				</configuration>
 			</plugin>
-			<!--
-			mvn clean package -P dev
-			mvn clean package -P qa
-            -->
+			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -169,6 +258,19 @@
             <url>http://repository.mulesoft.org/releases/</url>
             <layout>default</layout>
         </repository>
+        
+        <!-- 
+        <repository>
+            <id>mule</id>
+            <name>Mule Releases</name>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>mule-snapshots</id>
+            <name>Mule Snapshots</name>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/snapshots</url>
+        </repository>
+        -->
     </repositories>
     
     <pluginRepositories>
@@ -181,24 +283,35 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
+        
+        <pluginRepository>
+        	<id>mule-public</id>
+        	<url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
+        	<snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+    	</pluginRepository>
+    
     </pluginRepositories>
     
     
     <profiles>
-     	   <profile>
-		    <id>DEV</id>
+    
+	 	  
+	  <profile>
+		    <id>dev</id>
 		    <activation>
 		      <activeByDefault>true</activeByDefault>
 		    </activation>
 		    <properties>
-		      <env>DEV</env>
+		      <env>dev</env>
 		    </properties>
 	  </profile>
 	  
 	  <profile>
-		    <id>SANDBOX</id>
+		    <id>sandbox</id>
 		    <properties>
-		      <env>SANDBOX</env>
+		      <env>sandbox</env>
 		    </properties>
 	  </profile>
 	  
@@ -208,8 +321,37 @@
 		      <env>Production</env>
 		    </properties>
 	  </profile>
-	 	  
 	  
-    </profiles>
+	</profiles>
+	
+
+	
+		
+		
+		
+		<distributionManagement>	
+		 <repository>
+	      <uniqueVersion>false</uniqueVersion>
+	      <id>Local</id>
+	      <name>Local Repository</name>
+	      <url>file:///D:/Laptop_Backup/Users/191155/.m2/repository</url>
+	      <layout>default</layout>
+	    </repository>
+	    </distributionManagement>		
+		
+	<!-- 
+	<distributionManagement>
+	     <repository>
+            <uniqueVersion>false</uniqueVersion>
+          	<id>mycloudhub</id>
+          	<name>Cloud Hub</name>
+          	<url>https://anypoint.mulesoft.com/cloudhub/</url>
+          	<layout>default</layout>
+         </repository>
+        
+	</distributionManagement>	 -->
+	
+	 
+	
 
 </project>
