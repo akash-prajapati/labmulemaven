@@ -32,7 +32,7 @@
 			mvn clean package -P Production
 			-->
             
-		<finalName>${project.artifactId}-${env}</finalName> 
+		<finalName>${project.artifactId}</finalName> 
      	<resources>     	
      		<resource>
      			<directory>src/main/resources</directory>
@@ -57,7 +57,7 @@
 			        <domain>${project.artifactId}-akash-${env}</domain>
 			        <username>akashsep2017@dev</username>
 					<password>MuleSoft@2017</password>
-			        <application>${project.basedir}/target/${project.artifactId}-${env}.zip</application>			       	
+			        <application>${project.basedir}/target/${project.artifactId}.zip</application>			       	
 			        <properties>
    						<env.mule>${env}</env.mule>
 					</properties>			        
@@ -96,7 +96,7 @@
 						<workers>1</workers>
 				        <environment>${env}</environment>
 				        <!-- <uri>https://anypoint.mulesoft.com</uri> -->
-				        <application>${project.basedir}/target/${project.artifactId}-${env}.zip</application>
+				        <application>${project.basedir}/target/${project.artifactId}.zip</application>
 				        <applicationName>${cloudhub.domain}</applicationName>					        	
 				        <properties>
    								<env.mule>${env}</env.mule>
