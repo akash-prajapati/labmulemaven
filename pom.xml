@@ -32,7 +32,7 @@
 			mvn clean package -P Production
 			-->
             
-		<finalName>${project.artifactId}-A-${env}</finalName> 
+		<finalName>${project.artifactId}-${env}</finalName> 
      	<resources>     	
      		<resource>
      			<directory>src/main/resources</directory>
@@ -57,7 +57,7 @@
 			        <domain>${project.artifactId}-akash-${env}</domain>
 			        <username>akashsep2017@dev</username>
 					<password>MuleSoft@2017</password>
-			        <application>${project.basedir}/target/${project.artifactId}-akash-${env}.zip</application>			       	
+			        <application>${project.basedir}/target/${project.artifactId}-${env}.zip</application>			       	
 			        <properties>
    						<env.mule>${env}</env.mule>
 					</properties>			        
@@ -77,9 +77,7 @@
 			<!--  FINAL COMMAND -->	
 			<!-- 
 			mvn clean package -P dev
-			mvn deploy -Dcloudhub.username=akashsep2017 -Dcloudhub.password=MuleSoft@2017 -Dcloudhub.domain=akashp2017-sep-dev -P dev
-			mvn deploy -Dcloudhub.username=akashsep2017 -Dcloudhub.password=MuleSoft@2017 -Dcloudhub.domain=labmulemaven-A-dev -P dev
-			
+			mvn deploy -Dcloudhub.username=Username -Dcloudhub.password=Password -Dcloudhub.domain=domainname -P dev			
 			-->
      		
 	     	<plugin>
@@ -98,7 +96,7 @@
 						<workers>1</workers>
 				        <environment>${env}</environment>
 				        <!-- <uri>https://anypoint.mulesoft.com</uri> -->
-				        <application>${project.basedir}/target/${project.artifactId}-A-${env}.zip</application>
+				        <application>${project.basedir}/target/${project.artifactId}-${env}.zip</application>
 				        <applicationName>${cloudhub.domain}</applicationName>					        	
 				        <properties>
    								<env.mule>${env}</env.mule>
@@ -324,20 +322,17 @@
 	  
 	</profiles>
 	
-
 	
 		
-		
-		
 		<distributionManagement>	
-		 <repository>
-	      <uniqueVersion>false</uniqueVersion>
-	      <id>Local</id>
-	      <name>Local Repository</name>
-	      <url>file:///D:/Laptop_Backup/Users/191155/.m2/repository</url>
-	      <layout>default</layout>
-	    </repository>
-	    </distributionManagement>		
+		 	<repository>
+	      			<uniqueVersion>false</uniqueVersion>
+	      			<id>Local</id>
+	      			<name>Local Repository</name>
+	      			<url>file:///D:/Laptop_Backup/Users/191155/.m2/repository</url>
+	      			<layout>default</layout>
+	    		</repository>
+	    	</distributionManagement>		
 		
 	<!-- 
 	<distributionManagement>
