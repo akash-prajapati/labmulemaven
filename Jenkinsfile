@@ -1,6 +1,7 @@
 
 node {
-    
+   
+   // Maven Home Path
    def mvnHome
    
    // Cloudhub Username , password and project name
