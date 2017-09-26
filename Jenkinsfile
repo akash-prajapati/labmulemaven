@@ -20,7 +20,7 @@ node {
    
    /* Deploying to the DEV Machine*/
    stage('DEV') {
-	  env = 'dev'
+      env = 'dev'
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package -P ${env}"
       } else {
@@ -37,10 +37,8 @@ node {
     }
 	
    /* Deploying to the SANDBOX Machine*/
-   stage('SANDBOX') {
-   
-	  env = 'sandbox'
-	  
+   stage('SANDBOX') {   
+      env = 'sandbox'	  
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package -P ${env}"
       } else {
