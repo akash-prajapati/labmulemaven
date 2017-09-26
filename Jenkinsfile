@@ -3,6 +3,7 @@ node {
     
    def mvnHome
    
+   // Cloudhub Username , password and project name
    def cuser   = params.clouduser 
    def cpwd    = params.cloudpwd
    def prjname = params.prjname 
