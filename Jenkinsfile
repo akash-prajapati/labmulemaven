@@ -46,6 +46,5 @@ node {
       } else {
           bat(/"${mvnHome}\bin\mvn" clean package deploy -Dcloudhub.username=${cuser} -Dcloudhub.password=${cpwd} -Dcloudhub.domain=${prjname}-${env} -P ${env}/)
       }    
-   }
-        
+   }        
 }
