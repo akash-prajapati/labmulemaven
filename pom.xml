@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tcs</groupId>
 	<artifactId>labmulemaven</artifactId>
-    <version>1.0.0</version>
-    <packaging>mule</packaging>
+        <version>1.0.0</version>
+        <packaging>mule</packaging>
 	<name>Mule labmulemaven Application</name>
 
     <properties>
