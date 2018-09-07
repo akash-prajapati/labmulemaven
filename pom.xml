@@ -329,7 +329,7 @@
 	      			<uniqueVersion>false</uniqueVersion>
 	      			<id>Local</id>
 	      			<name>Local Repository</name>
-	      			<url>file:///D:/Laptop_Backup/Users/191155/.m2/repository</url>
+	      			<url>file:///C:.m2/repository/repository</url>
 	      			<layout>default</layout>
 	    		</repository>
 	    	</distributionManagement>		
