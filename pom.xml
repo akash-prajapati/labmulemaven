@@ -8,12 +8,12 @@
         <packaging>mule</packaging>
 	<name>Mule labmulemaven Application</name>
 
-    <properties>
+    	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<mule.version>3.8.5</mule.version>
-    	<mule.tools.version>1.2</mule.tools.version>
-    	<mule.project.filename>${project.artifactId}-A-${env}</mule.project.filename>
+    		<mule.tools.version>1.2</mule.tools.version>
+    		<mule.project.filename>${project.artifactId}-A-${env}</mule.project.filename>
 	</properties>
 
 	<build>
