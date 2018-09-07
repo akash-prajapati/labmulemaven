@@ -1,6 +1,6 @@
 
 node {
-   
+   // OLD SCRIPT : GROOVY
    // Maven Home Path
    def mvnHome
    
